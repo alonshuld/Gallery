@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "MemoryAccess.h"
 #include "AlbumManager.h"
 
@@ -36,10 +37,15 @@ int main(void)
 	// initialize album manager
 	AlbumManager albumManager(dataAccess);
 
+	//time var
+	time_t tmNow;
+	tmNow = time(NULL);
+	struct tm t = *localtime(&tmNow);
 
 	std::string albumName;
-	std::cout << "Welcome to Gallery!" << std::endl;
-	std::cout << "===================" << std::endl;
+	std::cout << "Welcome to AlonSD's Gallery!" << std::endl;
+	std::cout << " " << t.tm_mday << "/" << t.tm_mon + 1 << "/" << t.tm_year + 1900 << "\t    " << t.tm_hour << ":" << t.tm_min << std::endl;
+	std::cout << "============================" << std::endl;
 	std::cout << "Type " << HELP << " to a list of all supported commands" << std::endl;
 	
 	do {
