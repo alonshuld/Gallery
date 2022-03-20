@@ -6,7 +6,7 @@
 
 
 AlbumManager::AlbumManager(IDataAccess& dataAccess) :
-    m_dataAccess(dataAccess), m_nextPictureId(100), m_nextUserId(200)
+    m_dataAccess(dataAccess), m_nextPictureId(dataAccess.lastPicId()), m_nextUserId(dataAccess.lastUserId())
 {
 	// Left empty
 	m_dataAccess.open();

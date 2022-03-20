@@ -34,6 +34,7 @@ public:
 	void untagUserInPicture(const std::string& albumName, const std::string& pictureName, int userId) override;
 	void addPictureToAlbumByName(const std::string& albumName, const Picture& picture) override;
 	void removePictureFromAlbumByName(const std::string& albumName, const std::string& pictureName) override;
+	int lastPicId() override;
 
 	// user related
 	void createUser(User& user) override;
@@ -44,7 +45,8 @@ public:
 
 	// user statistics
 	int countAlbumsOwnedOfUser(const User& user) override;
-	int countAlbumsTaggedOfUser(const User& user) override; //unfinished!
+	int lastUserId() override;
+	int countAlbumsTaggedOfUser(const User& user) override; //unfinished! //get all tags with the user and the check every pic if its from othe album
 	int countTagsOfUser(const User& user) override;
 	float averageTagsPerAlbumOfUser(const User& user) override; //unfinished!
 private:
