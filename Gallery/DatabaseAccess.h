@@ -41,6 +41,7 @@ public:
 	bool doesUserExists(int userId) override;
 	User getUser(int userId) override;
 	void printUsers() override;
+	int getAmountOfUsers() override;
 
 	// user statistics
 	int countAlbumsOwnedOfUser(const User& user) override;

@@ -27,6 +27,7 @@ public:
 	// user related
 	virtual void printUsers() =0;
 	virtual User getUser(int userId) = 0;
+	virtual int getAmountOfUsers() = 0;
 	virtual void createUser(User& user ) = 0;
 	virtual void deleteUser(const User& user) = 0;
 	virtual bool doesUserExists(int userId) = 0 ;

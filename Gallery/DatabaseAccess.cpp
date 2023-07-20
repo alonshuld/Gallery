@@ -198,10 +198,10 @@ int callbackPrintUsers(void* data, int argc, char** argv, char** azColName)
 {
 	for (int i = 0; i < argc; i++)
 	{
-		if (std::string(azColName[i]) == "Name")
+		if (std::string(azColName[i]) == "ID")
+			std::cout << argv[i] << "@";
+		else if (std::string(azColName[i]) == "Name")
 			std::cout << argv[i] << std::endl;
-		else if (std::string(azColName[i]) == "ID")
-			std::cout << argv[i] << "@" << std::endl;
 	}
 	std::cout << std::endl;
 	return 0;
@@ -379,6 +379,21 @@ void DatabaseAccess::printUsers()
 	res = sqlite3_exec(this->db, sqlStatedment.c_str(), callbackPrintUsers, nullptr, &errMessage);
 	if (res != SQLITE_OK)
 		std::cerr << "---Print all users failed!---" << std::endl << errMessage << std::endl;
+}
+
+int DatabaseAccess::getAmountOfUsers()
+{
+	int ans;
+	int res;
+	std::string sqlStatedment;
+	char* errMessage = nullptr;
+	sqlStatedment = "SELECT * FROM Users;";
+	res = sqlite3_exec(this->db, sqlStatedment.c_str(), callbackReturnArgc, &ans, &errMessage);
+	if (res != SQLITE_OK)
+		std::cerr << "---Get amount of users failed!---" << std::endl << errMessage << std::endl;
+	if (ans < 0)
+		ans = 0;
+	return ans;
 }
 
 int DatabaseAccess::countAlbumsOwnedOfUser(const User& user)

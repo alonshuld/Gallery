@@ -10,6 +10,7 @@ AlbumManager::AlbumManager(IDataAccess& dataAccess) :
 {
 	// Left empty
 	m_dataAccess.open();
+	m_nextUserId = 200 + m_dataAccess.getAmountOfUsers();
 }
 
 void AlbumManager::executeCommand(CommandType command) {
