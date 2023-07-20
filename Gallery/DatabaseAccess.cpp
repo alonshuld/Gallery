@@ -322,6 +322,19 @@ void DatabaseAccess::removePictureFromAlbumByName(const std::string& albumName, 
 		std::cerr << "---Remove picture from an album by name failed!---" << std::endl << errMessage << std::endl;
 }
 
+int DatabaseAccess::lastPicId()
+{
+	int res;
+	Picture lastPic(1, "test");
+	std::string sqlStatedment;
+	char* errMessage = nullptr;
+	sqlStatedment = "SELECT max(ID) as ID, Name, Location, Creation_date, Album_ID FROM Pictures;";
+	res = sqlite3_exec(this->db, sqlStatedment.c_str(), callbackPicture, &lastPic, &errMessage);
+	if (res != SQLITE_OK)
+		std::cerr << "---Last user ID failed!---" << std::endl << errMessage << std::endl;
+	return lastPic.getId();
+}
+
 void DatabaseAccess::createUser(User& user)
 {
 	int res;
@@ -407,6 +420,19 @@ int DatabaseAccess::countAlbumsOwnedOfUser(const User& user)
 	if (res != SQLITE_OK)
 		std::cerr << "---Count albums owned by a user failed!---" << std::endl << errMessage << std::endl;
 	return ans;
+}
+
+int DatabaseAccess::lastUserId()
+{
+	int res;
+	User lastUser(1, "test");
+	std::string sqlStatedment;
+	char* errMessage = nullptr;
+	sqlStatedment = "SELECT max(ID) as ID, Name FROM Users;";
+	res = sqlite3_exec(this->db, sqlStatedment.c_str(), callbackUser, &lastUser, &errMessage);
+	if (res != SQLITE_OK)
+		std::cerr << "---Last user ID failed!---" << std::endl << errMessage << std::endl;
+	return lastUser.getId();
 }
 
 int DatabaseAccess::countAlbumsTaggedOfUser(const User& user)
